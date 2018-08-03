@@ -14,7 +14,8 @@ source:
   sha256: a7a8b6141350a6211bc652c7fddee59d3692b0886735ce3dc716dedfd15b9ee0
 
 build:
-  number: 0
+  merge_build_host: True  # [win]
+  number: 1
   # Dependency r-igraph is unavailable for Windows
   skip: true  # [win]
 
@@ -24,20 +25,20 @@ build:
 
 requirements:
   build:
+    - posix                # [win]
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('m2w64_c') }}  # [win]
+  host:
     - r-base
     - r-mass
     - r-matrix
     - r-igraph
-    - posix                # [win]
-    - {{native}}toolchain  # [win]
-    - gcc                  # [not win]
 
   run:
     - r-base
     - r-mass
     - r-matrix
     - r-igraph
-    - libgcc  # [not win]
 
 test:
   commands:
