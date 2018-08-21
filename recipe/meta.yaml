@@ -15,10 +15,8 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 1
-  # Dependency r-igraph is unavailable for Windows
-  skip: true  # [win]
-
+  number: 2
+  skip: true  # [win32]
   rpaths:
     - lib/R/lib/
     - lib/
@@ -33,7 +31,6 @@ requirements:
     - r-mass
     - r-matrix
     - r-igraph
-
   run:
     - r-base
     - r-mass
