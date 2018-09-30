@@ -15,25 +15,26 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 1
-  # Dependency r-igraph is unavailable for Windows
-  skip: true  # [win]
-
+  number: 2
+  skip: true  # [win32]
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('c') }}        # [not win]
+    - {{native}}toolchain        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}make
+    - {{posix}}sed               # [win]
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
   host:
     - r-base
     - r-mass
     - r-matrix
     - r-igraph
-
   run:
     - r-base
     - r-mass
@@ -63,3 +64,4 @@ extra:
     - daler
     - jdblischak
     - cbrueffer
+    - dbast
