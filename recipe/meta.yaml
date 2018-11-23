@@ -15,7 +15,7 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 2
+  number: 1002
   skip: true  # [win32]
   rpaths:
     - lib/R/lib/
@@ -54,8 +54,7 @@ about:
     given polynomial order. Specialized implementations for the latter two subproblems
     are given to improve stability and speed.
   license_family: GPL3
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
-  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
 
 extra:
   recipe-maintainers:
