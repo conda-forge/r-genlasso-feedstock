@@ -1,4 +1,4 @@
-{% set version = '1.3' %}
+{% set version = '1.4' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -7,16 +7,14 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: genlasso_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/genlasso_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/genlasso/genlasso_{{ version }}.tar.gz
-  sha256: a7a8b6141350a6211bc652c7fddee59d3692b0886735ce3dc716dedfd15b9ee0
+    - {{ cran_mirror }}/src/contrib/genlasso_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/genlasso/genlasso_{{ version }}.tar.gz
+  sha256: 0f74a1566eb69ada921fe6b0a9aaf230778fdacb112b858233993f038166e106
 
 build:
   merge_build_host: True  # [win]
-  number: 1002
-  skip: true  # [win32]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -24,7 +22,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}        # [not win]
-    - {{native}}toolchain        # [win]
+    - {{ compiler('m2w64_c') }}  # [win]
     - {{posix}}filesystem        # [win]
     - {{posix}}make
     - {{posix}}sed               # [win]
@@ -37,30 +35,44 @@ requirements:
     - r-igraph
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
     - r-mass
     - r-matrix
     - r-igraph
 
 test:
   commands:
-    - $R -e "library('genlasso')"  # [not win]
+    - $R -e "library('genlasso')"           # [not win]
     - "\"%R%\" -e \"library('genlasso')\""  # [win]
 
 about:
   home: https://github.com/statsmaths/genlasso
   license: GPL (>= 2.0)
-  summary: This package computes the solution path for generalized lasso problems. Important
-    use cases are the fused lasso over an arbitrary graph, and trend fitting of any
-    given polynomial order. Specialized implementations for the latter two subproblems
+  summary: Provides fast algorithms for computing the solution path for generalized lasso problems.
+    Important use cases are the fused lasso over an arbitrary graph, and trend fitting
+    of any given polynomial order. Specialized implementations for the latter two problems
     are given to improve stability and speed.
   license_family: GPL3
   license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
 
 extra:
   recipe-maintainers:
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
-    - cbrueffer
-    - dbast
+    - conda-forge/r
+
+# Package: genlasso
+# Type: Package
+# Title: Path Algorithm for Generalized Lasso Problems
+# Version: 1.4
+# Date: 2019-07-11
+# Author: Taylor B. Arnold and Ryan J. Tibshirani
+# Maintainer: Taylor Arnold <taylor.arnold@acm.org>
+# Description: Provides fast algorithms for computing the solution path for generalized lasso problems. Important use cases are the fused lasso over an arbitrary graph, and trend fitting of any given polynomial order. Specialized implementations for the latter two problems are given to improve stability and speed.
+# License: GPL (>= 2.0)
+# Depends: MASS, Matrix, igraph
+# ByteCompile: TRUE
+# URL: https://github.com/statsmaths/genlasso
+# Packaged: 2019-07-11 10:00:46 UTC; taylor
+# NeedsCompilation: yes
+# Repository: CRAN
+# RoxygenNote: 6.1.1
+# Date/Publication: 2019-07-11 13:32:48 UTC
