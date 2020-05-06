@@ -47,7 +47,7 @@ test:
 
 about:
   home: https://github.com/statsmaths/genlasso
-  license: GPL (>= 2.0)
+  license: GPL-2.0-or-later
   summary: Provides fast algorithms for computing the solution path for generalized lasso problems.
     Important use cases are the fused lasso over an arbitrary graph, and trend fitting
     of any given polynomial order. Specialized implementations for the latter two problems
