@@ -3,7 +3,7 @@ About r-genlasso
 
 Home: https://github.com/statsmaths/genlasso
 
-Package license: GPL (>= 2.0)
+Package license: GPL-2.0-or-later
 
 Feedstock license: BSD 3-Clause
 
