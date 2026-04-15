@@ -17,12 +17,12 @@ channel_targets:
 cran_mirror:
 - https://cran.r-project.org
 macos_machine:
-- x86_64-apple-darwin13.4.0
+- arm64-apple-darwin20.0.0
 pin_run_as_build:
   r-base:
     min_pin: x.x
     max_pin: x.x
 r_base:
-- '4.5'
+- '4.4'
 target_platform:
-- osx-64
+- osx-arm64
